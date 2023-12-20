@@ -9,12 +9,14 @@ from models.review import Review
 from models.state import State
 from models.user import User
 
-@app_views.route("/status", methods=['GET'])
+
+@app_views.route("/status", methods=['GET'], strict_slashes=False)
 def status():
-    status_ok = {"status":"OK"}
+    status_ok = {"status": "OK"}
     return jsonify(status_ok)
 
-@app_views.route("/stats", methods=['GET'])
+
+@app_views.route("/stats", methods=['GET'], strict_slashes=False)
 def count_objs():
     stats_dict = {
         'amenities': storage.count(Amenity),
@@ -22,7 +24,6 @@ def count_objs():
         'places': storage.count(Place),
         'reviews': storage.count(Review),
         'states': storage.count(State),
-        'users': storage.count(User),
+        'users': storage.count(User)
     }
     return jsonify(stats_dict)
-

@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""index file"""
 from api.v1.views import app_views
 from flask import jsonify
 from models import storage
@@ -12,12 +13,14 @@ from models.user import User
 
 @app_views.route("/status", methods=['GET'], strict_slashes=False)
 def status():
+    """get a good status"""
     status_ok = {"status": "OK"}
     return jsonify(status_ok)
 
 
 @app_views.route("/stats", methods=['GET'], strict_slashes=False)
 def count_objs():
+    """count obj"""
     stats_dict = {
         'amenities': storage.count(Amenity),
         'cities': storage.count(City),

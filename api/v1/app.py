@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""file app"""
 from flask import Flask, render_template, jsonify
 from models import storage
 from api.v1.views import app_views

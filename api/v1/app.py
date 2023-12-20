@@ -15,10 +15,11 @@ def teardown(exception):
     """closes the storage on teardown"""
     storage.close()
 
+
 @app.errorhandler(404)
 def page_not_found(exception):
     """404 error"""
-    error = {"error":"Not found"}
+    error = {"error": "Not found"}
     return jsonify(error), 404
 
 

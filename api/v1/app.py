@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-from flask import Flask
+from flask import Flask, render_template, jsonify
 from models import storage
 from api.v1.views import app_views
 from os import environ
@@ -12,6 +12,12 @@ app.register_blueprint(app_views)
 def teardown(exception):
     """closes the storage on teardown"""
     storage.close()
+
+@app.errorhandler(404)
+def page_not_found(exception):
+    """404 error"""
+    error = {"error":"Not found"}
+    return jsonify(error), 404
 
 
 if __name__ == '__main__':

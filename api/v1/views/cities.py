@@ -1,10 +1,10 @@
 #!/usr/bin/python3
 """State API views"""
-from flask import jsonify, request, abort
-from models import storage
+from flask import abort, jsonify, request
 from api.v1.views import app_views
-from models.state import State
 from models.city import City
+from models.state import State
+from models import storage
 
 
 @app_views.route(
@@ -48,13 +48,12 @@ def create_city(state_id):
     """Create a new City object"""
     state = storage.get(State, state_id)
     if state is None:
-        return jsonify({"error": "Not a JSON"}), 400
+        abort(404)
     data = request.get_json()
     if data is None:
-        return jsonify({"error": "Not a JSON"}), 400
-
+        abort({"error": "Not a JSON"}), 400
     if 'name' not in data:
-        return jsonify({"error": "Missing name"}), 400
+        abort({"error": "Missing name"}), 400
     data['state_id'] = state_id
     new_city = City(**data)
     new_city.save()
@@ -66,11 +65,11 @@ def update_city(city_id):
     """Update a City object"""
     city_get = storage.get(City, city_id)
     if city_get is None:
-        return jsonify({"error": "Not a JSON"}), 400
+        abort({"error": "Not a JSON"}), 400
 
     data = request.get_json()
     if data is None:
-        return jsonify({"error": "Not a JSON"}), 400
+        abort({"error": "Not a JSON"}), 400
 
     for key, value in data.items():
         if key not in ['id', 'state_id', 'created_at', 'updated_at']:

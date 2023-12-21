@@ -66,7 +66,7 @@ def update_amenity(amenity_id):
 
     data = request.get_json()
     if data is None:
-        abort(400, {"error": "Not a JSON"})
+        abort(400, "Not a JSON")
 
     for key, value in data.items():
         if key not in ['id', 'name', 'created_at', 'updated_at']:

@@ -65,11 +65,11 @@ def update_city(city_id):
     """Update a City object"""
     city_get = storage.get(City, city_id)
     if city_get is None:
-        return jsonify({"error": "Not a JSON"}), 400
+        return jsonify("Not a JSON"), 400
 
     data = request.get_json()
     if data is None:
-        return jsonify({"error": "Not a JSON"}), 400
+        return jsonify("Not a JSON"), 400
 
     for key, value in data.items():
         if key not in ['id', 'state_id', 'created_at', 'updated_at']:

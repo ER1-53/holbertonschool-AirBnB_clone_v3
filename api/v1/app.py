@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """file app"""
-from flask import Flask, render_template, jsonify
+from flask import Flask, jsonify
 from models import storage
 from api.v1.views import app_views
 from os import environ

@@ -10,6 +10,8 @@ from api.v1.views import app_views
 def get_states():
     """Retrieve the list of all objects"""
     states_get = storage.all(State).values()
+    if states_get is None:
+        abort(404)
     state_dict = []
     for state_get in states_get:
         all_states = state_get.to_dict()
